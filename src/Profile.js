@@ -4,6 +4,7 @@ import './Profile.css';
 
 function Profile() {
     const [user, setUser] = useState({ email: '', username: '', password: '' });
+    const [originalUser, setOriginalUser] = useState(null); // Güncelleme öncesi değerleri saklamak için
     const [editMode, setEditMode] = useState(null);
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
@@ -22,6 +23,7 @@ function Profile() {
                 if (response.ok) {
                     const userData = await response.json();
                     setUser(userData);
+                    setOriginalUser(userData); // Orijinal değerleri sakla
                 } else {
                     console.error("Kullanıcı bilgileri getirilemedi.");
                 }
@@ -53,13 +55,16 @@ function Profile() {
             if (response.ok) {
                 alert("Profil güncellendi!");
                 setEditMode(null);
+                setOriginalUser(user); // Güncelleme başarılı, orijinal değerleri güncelle
             } else {
                 const errorData = await response.json();
                 alert(`Güncelleme başarısız: ${errorData.message || errorData}`);
+                setUser(originalUser); // Güncelleme başarısız, eski değerlere dön
             }
         } catch (error) {
             console.error("Bir hata oluştu:", error);
             alert("Güncelleme sırasında bir hata oluştu.");
+            setUser(originalUser); // Güncelleme sırasında hata oluştu, eski değerlere dön
         }
     };
 
@@ -72,7 +77,7 @@ function Profile() {
                 <p><strong>Kullanıcı Adı:</strong> {user.username}</p>
             </div>
 
-            {/* Güncelleme Seçenekleri */}
+            {/* Güncelleme Seçenekleri - Sadece editMode null ise göster */}
             {editMode === null && (
                 <div className="update-buttons">
                     <button onClick={() => setEditMode('email')} className="edit-button">E-posta Güncelle</button>
@@ -91,7 +96,7 @@ function Profile() {
                         onChange={(e) => setUser({ ...user, email: e.target.value })}
                     />
                     <button onClick={handleSave} className="save-button">Kaydet</button>
-                    <button onClick={() => setEditMode(null)} className="cancel-button">İptal</button>
+                    <button onClick={() => { setEditMode(null); setUser(originalUser); }} className="cancel-button">İptal</button>
                 </div>
             )}
 
@@ -105,7 +110,7 @@ function Profile() {
                         onChange={(e) => setUser({ ...user, username: e.target.value })}
                     />
                     <button onClick={handleSave} className="save-button">Kaydet</button>
-                    <button onClick={() => setEditMode(null)} className="cancel-button">İptal</button>
+                    <button onClick={() => { setEditMode(null); setUser(originalUser); }} className="cancel-button">İptal</button>
                 </div>
             )}
 
@@ -124,7 +129,7 @@ function Profile() {
                         </span>
                     </div>
                     <button onClick={handleSave} className="save-button">Kaydet</button>
-                    <button onClick={() => setEditMode(null)} className="cancel-button">İptal</button>
+                    <button onClick={() => { setEditMode(null); setUser(originalUser); }} className="cancel-button">İptal</button>
                 </div>
             )}
 
