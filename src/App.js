@@ -6,6 +6,7 @@ import Login from './Login';
 import Register from './Register';
 import Profile from './Profile'; // Profile bileşeni eklendi
 import './App.css';
+import AddProduct from './AddProduct';
 
 function App() {
     return (
@@ -16,6 +17,7 @@ function App() {
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/profile" element={<Profile />} /> {/* Profil sayfası rotası */}
+                    <Route path="/add-product" element={<AddProduct />} />
                 </Routes>
             </div>
         </Router>

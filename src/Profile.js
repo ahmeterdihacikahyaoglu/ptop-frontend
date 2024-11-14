@@ -68,14 +68,17 @@ function Profile() {
         }
     };
 
+    
+
     return (
         <div className="profile-container">
             <h2>Profil Sayfası</h2>
-            
+            <br></br>
             <div className="profile-info">
                 <p><strong>E-posta:</strong> {user.email}</p>
                 <p><strong>Kullanıcı Adı:</strong> {user.username}</p>
             </div>
+            
 
             {/* Güncelleme Seçenekleri - Sadece editMode null ise göster */}
             {editMode === null && (
@@ -84,7 +87,9 @@ function Profile() {
                     <button onClick={() => setEditMode('username')} className="edit-button">Kullanıcı Adı Güncelle</button>
                     <button onClick={() => setEditMode('password')} className="edit-button">Şifre Güncelle</button>
                 </div>
+                
             )}
+            
 
             {/* E-posta Güncelleme Formu */}
             {editMode === 'email' && (
@@ -131,11 +136,18 @@ function Profile() {
                     <button onClick={handleSave} className="save-button">Kaydet</button>
                     <button onClick={() => { setEditMode(null); setUser(originalUser); }} className="cancel-button">İptal</button>
                 </div>
+                
             )}
-
+            <div>
+        <button onClick={() => navigate('/add-product')} className="product-add-button">Ürün Ekle</button>
+        <button onClick={() => navigate('/list-product')} className="product-list-button">Ürün Listele</button>
+        </div>
+            <div>
             <button onClick={handleLogout} className="logout-button">Çıkış Yap</button>
+            </div>
         </div>
     );
+    
 }
 
 export default Profile;
