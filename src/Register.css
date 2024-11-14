@@ -1,213 +1,72 @@
-/* src/Register.css */
-.register-container {
-    width: 100%;
-    max-width: 400px;
+.profile-container {
+    max-width: 500px;
+    margin: 0 auto;
     padding: 2rem;
     background-color: #ffffff;
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
 
-h2 {
+.profile-info {
     margin-bottom: 1.5rem;
-    color: #333333;
-    font-size: 1.8rem;
-    font-weight: 600;
 }
 
-label {
-    display: block;
-    margin-top: 1rem;
-    margin-bottom: 0.5rem;
-    text-align: left;
-    color: #555555;
-    font-size: 0.9rem;
+.update-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 1.5rem;
 }
 
-input[type="text"], input[type="email"], input[type="password"] {
-    width: 100%;
-    padding: 0.75rem 0.25rem;
+.update-buttons .edit-button {
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.update-buttons .edit-button:hover {
+    background-color: #2980b9;
+}
+
+/* Ürün Ekle Butonu */
+.product-add-button {
+    display: inline-block;
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.3s;
     margin-bottom: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 1rem;
-    transition: border-color 0.3s;
 }
 
-input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus {
-    border-color: #3498db;
-    outline: none;
-}
-
-.register-button {
-    width: 100%;
-    padding: 0.75rem;
-    background-color: #3498db;
-    color: #ffffff;
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: 600;
-    transition: background-color 0.3s ease;
-}
-
-.register-button:hover {
+.product-add-button:hover {
     background-color: #2980b9;
 }
 
-/* Giriş Yap bağlantısı */
-.login-link {
-    margin-top: 1rem;
-    font-size: 0.9rem;
-}
-
-.login-link span {
-    color: #555555;
-}
-
-.login-link a {
-    color: #3498db;
-    text-decoration: none;
-    transition: color 0.3s;
-}
-
-.login-link a:hover {
-    color: #2980b9;
-    text-decoration: underline;
-}
-.home-link {
-    margin-top: 1rem;
-    font-size: 0.9rem;
-}
-
-.home-link a {
-    color: #3498db;
-    text-decoration: none;
-    transition: color 0.3s;
-}
-
-.home-link a:hover {
-    color: #2980b9;
-    text-decoration: underline;
-}
-/* Butonların genel görünümünü düzenleme */
-.edit-button {
-    background-color: #3498db;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    margin: 5px;
-    cursor: pointer;
-    font-size: 0.9rem;
-    transition: background-color 0.3s ease;
-}
-
-.edit-button:hover {
-    background-color: #2980b9;
-}
-
-/* Kaydet ve İptal butonları */
-.save-button, .cancel-button {
-    background-color: #2ecc71;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    margin: 5px;
-    cursor: pointer;
-    font-size: 0.9rem;
-    transition: background-color 0.3s ease;
-}
-
-.save-button:hover {
-    background-color: #27ae60;
-}
-
-.cancel-button {
-    background-color: #e74c3c;
-}
-
-.cancel-button:hover {
-    background-color: #c0392b;
-}
-
-/* Çıkış Yap butonunu da aynı stil ile uyumlu yapalım */
 .logout-button {
     background-color: #3498db;
-    color: white;
+    color: #fff;
+    padding: 10px 20px;
     border: none;
     border-radius: 5px;
-    padding: 10px 20px;
-    margin-top: 20px;
     cursor: pointer;
-    font-size: 1rem;
-    transition: background-color 0.3s ease;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    width: 100%;
+    margin-top: 1.5rem;
 }
 
 .logout-button:hover {
     background-color: #2980b9;
-}
-/* Profil bilgileri için genel stil */
-.profile-container {
-    text-align: center;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
-    margin: 0 auto;
-}
-
-.profile-container h2 {
-    color: #333;
-    margin-bottom: 20px;
-}
-
-/* E-posta ve kullanıcı adı bilgileri için stil */
-.profile-info {
-    background-color: #ffffff;
-    padding: 15px;
-    border-radius: 8px;
-    margin-bottom: 15px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.profile-info p {
-    font-size: 1rem;
-    color: #666;
-    margin: 5px 0;
-}
-
-.profile-info strong {
-    color: #333;
-    font-weight: bold;
-}
-/* Şifre alanı için stil */
-.password-field {
-    position: relative;
-    display: flex;
-    align-items: center;
-}
-
-.password-field input {
-    width: 100%;
-    padding-right: 30px; /* Göz ikonuna yer açmak için sağa boşluk ekleyin */
-}
-
-.toggle-password {
-    position: absolute;
-    right: 10px;
-    top: 35%; /* Üstten %50 */
-    transform: translateY(-50%); /* Ortalamak için -%50 kaydırma */
-    cursor: pointer;
-    font-size: 1.2rem;
-    color: #666;
-    transition: color 0.3s;
-}
-
-.toggle-password:hover {
-    color: #333;
 }

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import './Profile.css';
 
 function Profile() {
     const [user, setUser] = useState({ email: '', username: '', password: '' });
-    const [originalUser, setOriginalUser] = useState(null); // Güncelleme öncesi değerleri saklamak için
+    const [originalUser, setOriginalUser] = useState(null);
     const [editMode, setEditMode] = useState(null);
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
@@ -23,7 +23,7 @@ function Profile() {
                 if (response.ok) {
                     const userData = await response.json();
                     setUser(userData);
-                    setOriginalUser(userData); // Orijinal değerleri sakla
+                    setOriginalUser(userData);
                 } else {
                     console.error("Kullanıcı bilgileri getirilemedi.");
                 }
@@ -55,16 +55,16 @@ function Profile() {
             if (response.ok) {
                 alert("Profil güncellendi!");
                 setEditMode(null);
-                setOriginalUser(user); // Güncelleme başarılı, orijinal değerleri güncelle
+                setOriginalUser(user);
             } else {
                 const errorData = await response.json();
                 alert(`Güncelleme başarısız: ${errorData.message || errorData}`);
-                setUser(originalUser); // Güncelleme başarısız, eski değerlere dön
+                setUser(originalUser);
             }
         } catch (error) {
             console.error("Bir hata oluştu:", error);
             alert("Güncelleme sırasında bir hata oluştu.");
-            setUser(originalUser); // Güncelleme sırasında hata oluştu, eski değerlere dön
+            setUser(originalUser);
         }
     };
 
@@ -77,7 +77,6 @@ function Profile() {
                 <p><strong>Kullanıcı Adı:</strong> {user.username}</p>
             </div>
 
-            {/* Güncelleme Seçenekleri - Sadece editMode null ise göster */}
             {editMode === null && (
                 <div className="update-buttons">
                     <button onClick={() => setEditMode('email')} className="edit-button">E-posta Güncelle</button>
@@ -86,7 +85,8 @@ function Profile() {
                 </div>
             )}
 
-            {/* E-posta Güncelleme Formu */}
+            <Link to="/add-product" className="product-add-button">Ürün Ekle</Link> {/* Ürün Ekle butonu */}
+
             {editMode === 'email' && (
                 <div>
                     <label>Yeni E-posta:</label>
@@ -100,7 +100,6 @@ function Profile() {
                 </div>
             )}
 
-            {/* Kullanıcı Adı Güncelleme Formu */}
             {editMode === 'username' && (
                 <div>
                     <label>Yeni Kullanıcı Adı:</label>
@@ -114,7 +113,6 @@ function Profile() {
                 </div>
             )}
 
-            {/* Şifre Güncelleme Formu */}
             {editMode === 'password' && (
                 <div>
                     <label>Yeni Şifre:</label>
