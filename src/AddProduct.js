@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import './AddProduct.css';
+import { useNavigate, Link } from 'react-router-dom';
 
 function AddProduct() {
     const [productName, setProductName] = useState('');
     const [description, setDescription] = useState('');
     const [startingPrice, setStartingPrice] = useState('');
     const [image, setImage] = useState(null);
+    const navigate = useNavigate();
 
     const handleImageChange = (e) => {
         setImage(e.target.files[0]);
@@ -34,6 +35,7 @@ function AddProduct() {
             console.error("Hata:", error);
             alert("Ürün eklenirken bir hata oluştu.");
         }
+        navigate('/profile');
     };
 
     return (
@@ -50,10 +52,14 @@ function AddProduct() {
                 <input type="number" value={startingPrice} onChange={(e) => setStartingPrice(e.target.value)} min="1" required />
 
                 <label>Ürün Resmi:</label>
-                <input type="file" onChange={handleImageChange} />
+                <input type="file" accept=".jpg,.jpeg,.png" onChange={handleImageChange} />
 
                 <button type="submit" className="submit-button">Ürün Ekle</button>
             </form>
+
+            <div className="home-link">
+                <Link to="/profile">Profil'e Dön</Link>
+            </div>
         </div>
     );
 }

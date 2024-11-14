@@ -4,7 +4,7 @@ import './Profile.css';
 
 function Profile() {
     const [user, setUser] = useState({ email: '', username: '', password: '' });
-    const [originalUser, setOriginalUser] = useState(null); // Güncelleme öncesi değerleri saklamak için
+    const [originalUser, setOriginalUser] = useState(null);
     const [editMode, setEditMode] = useState(null);
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
@@ -23,7 +23,7 @@ function Profile() {
                 if (response.ok) {
                     const userData = await response.json();
                     setUser(userData);
-                    setOriginalUser(userData); // Orijinal değerleri sakla
+                    setOriginalUser(userData);
                 } else {
                     console.error("Kullanıcı bilgileri getirilemedi.");
                 }
@@ -55,43 +55,36 @@ function Profile() {
             if (response.ok) {
                 alert("Profil güncellendi!");
                 setEditMode(null);
-                setOriginalUser(user); // Güncelleme başarılı, orijinal değerleri güncelle
+                setOriginalUser(user);
             } else {
                 const errorData = await response.json();
                 alert(`Güncelleme başarısız: ${errorData.message || errorData}`);
-                setUser(originalUser); // Güncelleme başarısız, eski değerlere dön
+                setUser(originalUser);
             }
         } catch (error) {
             console.error("Bir hata oluştu:", error);
             alert("Güncelleme sırasında bir hata oluştu.");
-            setUser(originalUser); // Güncelleme sırasında hata oluştu, eski değerlere dön
+            setUser(originalUser);
         }
     };
 
-    
-
     return (
         <div className="profile-container">
-            <h2>Profil Sayfası</h2>
-            <br></br>
+            <h2>{user.username} Kullanıcı Profil Sayfası</h2>
+            
             <div className="profile-info">
                 <p><strong>E-posta:</strong> {user.email}</p>
                 <p><strong>Kullanıcı Adı:</strong> {user.username}</p>
             </div>
-            
 
-            {/* Güncelleme Seçenekleri - Sadece editMode null ise göster */}
             {editMode === null && (
                 <div className="update-buttons">
                     <button onClick={() => setEditMode('email')} className="edit-button">E-posta Güncelle</button>
                     <button onClick={() => setEditMode('username')} className="edit-button">Kullanıcı Adı Güncelle</button>
                     <button onClick={() => setEditMode('password')} className="edit-button">Şifre Güncelle</button>
                 </div>
-                
             )}
             
-
-            {/* E-posta Güncelleme Formu */}
             {editMode === 'email' && (
                 <div>
                     <label>Yeni E-posta:</label>
@@ -105,7 +98,6 @@ function Profile() {
                 </div>
             )}
 
-            {/* Kullanıcı Adı Güncelleme Formu */}
             {editMode === 'username' && (
                 <div>
                     <label>Yeni Kullanıcı Adı:</label>
@@ -119,7 +111,6 @@ function Profile() {
                 </div>
             )}
 
-            {/* Şifre Güncelleme Formu */}
             {editMode === 'password' && (
                 <div>
                     <label>Yeni Şifre:</label>
@@ -136,18 +127,19 @@ function Profile() {
                     <button onClick={handleSave} className="save-button">Kaydet</button>
                     <button onClick={() => { setEditMode(null); setUser(originalUser); }} className="cancel-button">İptal</button>
                 </div>
-                
             )}
-            <div>
-        <button onClick={() => navigate('/add-product')} className="product-add-button">Ürün Ekle</button>
-        <button onClick={() => navigate('/list-product')} className="product-list-button">Ürün Listele</button>
-        </div>
-            <div>
-            <button onClick={handleLogout} className="logout-button">Çıkış Yap</button>
-            </div>
+
+            {editMode === null && (
+                <div>
+                    <button onClick={() => navigate('/add-product')} className="product-add-button">Ürün Ekle</button>
+                    <button onClick={() => navigate('/list-product')} className="product-list-button">Ürün Listele</button>
+                    <br></br>
+                    <button onClick={handleLogout} className="logout-button">Çıkış Yap</button>
+                </div>
+            )}
+            
         </div>
     );
-    
 }
 
 export default Profile;
